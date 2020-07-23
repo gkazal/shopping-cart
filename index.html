@@ -39,7 +39,7 @@
                   </div>
                </div>
 
-               <div class="cart-item">
+               <div class="cart-item ">
                   <div class="row">
                      <div class="col-md-7 center-item mx-auto">
                         <img src="images/product-2.png" alt="">
@@ -47,9 +47,13 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="minusButton" class="btn btn-default">
+                              <i class="fas fa-minus"></i>
+                           </button>
+                           <input id="currentAmount" type="text" class="form-control text-center" value="1">
+                           <button id="plusButton" class="btn btn-default">
+                              <i class="fas fa-plus"></i>
+                           </button>
 
                         </div>
                         <h5>$60</h5>
@@ -88,7 +92,6 @@
       const phone_Price = document.getElementById('phonePrice').innerText // ekne innertext karon eta input tag nai.
       const actualPhonePrice = parseFloat(phone_Price)
 
-
       // plus button event handler..
       const plus_Button = document.getElementById('plusButton')
       plus_Button.addEventListener('click', function(){
@@ -103,21 +106,32 @@
          const totalPhonePrice = actualPhonePrice * totalAmount
          document.getElementById('phonePrice').innerText = totalPhonePrice
 
+      
+        funSubtotalPrice('subtotalPrice', actualPhonePrice)
+        funTotalPrice('totalPrice', actualPhonePrice)
+        
+      
+      })
          //subtotal price handled
-         const subtotal_Price = document.getElementById('subtotalPrice').innerText
+
+      function funSubtotalPrice(id, actualPhonePrice){
+         const subtotal_Price = document.getElementById(id).innerText
          const actualSubtotalPrice = parseFloat(subtotal_Price)
          const finalSubtotalPrice = actualSubtotalPrice + actualPhonePrice
-         document.getElementById('subtotalPrice').innerText = finalSubtotalPrice
-
-         //total price handled
-         const total_Price = document.getElementById('totalPrice').innerText
+         document.getElementById(id).innerText = finalSubtotalPrice
+      
+      }
+      //total price handled
+      function funTotalPrice(id, actualPhonePrice){
+         const total_Price = document.getElementById(id).innerText
          const actualTotalPrice = parseFloat(total_Price)
          const finalTotalPrice = actualTotalPrice + actualPhonePrice
-         document.getElementById('totalPrice').innerText = finalTotalPrice
+         document.getElementById(id).innerText = finalTotalPrice
+
+      }
+        
 
 
-
-      })
       // minus button event handler..
       const minus_Button = document.getElementById('minusButton')
       minus_Button.addEventListener('click', function(){
@@ -145,15 +159,13 @@
 
       })
 
-      //subtotal price handled..
+
 
 
 
 
 
    </script>
-
-
 
 
 
