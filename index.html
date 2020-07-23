@@ -16,13 +16,13 @@
       <div class="container">
          <div class="cart">
             <div class="col-md-12 col-lg-10 mx-auto">
+               
                <div class="cart-item">
                   <div class="row">
                      <div class="col-md-7 center-item">
                         <img src="images/product-1.png" alt="">
                         <h5>iPhone 11 128GB Black</h5>
                      </div>
-
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
                            <button id="minusButton" class="btn btn-default">
@@ -99,38 +99,21 @@
          const actualAmount = parseInt(numberAmount)
 
          // plus button update
+         //const totalNumber = plusButtonUpdate('currentAmount', actualAmount)
+         
          const totalAmount = actualAmount + 1
          document.getElementById('currentAmount').value = totalAmount
 
-         // phone price update with plus
+         //phone price update with plus
          const totalPhonePrice = actualPhonePrice * totalAmount
          document.getElementById('phonePrice').innerText = totalPhonePrice
 
       
-        funSubtotalPrice('subtotalPrice', actualPhonePrice)
+        funTotalPrice('subtotalPrice', actualPhonePrice)
         funTotalPrice('totalPrice', actualPhonePrice)
-        
       
       })
-         //subtotal price handled
-
-      function funSubtotalPrice(id, actualPhonePrice){
-         const subtotal_Price = document.getElementById(id).innerText
-         const actualSubtotalPrice = parseFloat(subtotal_Price)
-         const finalSubtotalPrice = actualSubtotalPrice + actualPhonePrice
-         document.getElementById(id).innerText = finalSubtotalPrice
-      
-      }
-      //total price handled
-      function funTotalPrice(id, actualPhonePrice){
-         const total_Price = document.getElementById(id).innerText
-         const actualTotalPrice = parseFloat(total_Price)
-         const finalTotalPrice = actualTotalPrice + actualPhonePrice
-         document.getElementById(id).innerText = finalTotalPrice
-
-      }
-        
-
+    
 
       // minus button event handler..
       const minus_Button = document.getElementById('minusButton')
@@ -145,19 +128,25 @@
          const totalPhonePrice = actualPhonePrice * totalAmount
          document.getElementById('phonePrice').innerText = totalPhonePrice
 
-         //subtotal price handled
-         const subtotal_Price = document.getElementById('subtotalPrice').innerText
-         const actualSubtotalPrice = parseFloat(subtotal_Price)
-         const finalSubtotalPrice = actualSubtotalPrice - actualPhonePrice
-         document.getElementById('subtotalPrice').innerText = finalSubtotalPrice
-
-         // total price handled
-         const total_Price = document.getElementById('totalPrice').innerText
-         const actualTotalPrice = parseFloat(total_Price)
-         const finalTotalPrice = actualTotalPrice - actualPhonePrice
-         document.getElementById('totalPrice').innerText = finalTotalPrice
-
+         funTotalPrice('subtotalPrice', -1 * actualPhonePrice)
+         funTotalPrice('totalPrice', -1 * actualPhonePrice)
+         
       })
+
+      function plusButtonUpdate(id, actualAmount){
+         const totalAmount = actualAmount + 1
+         document.getElementById(id).value = totalAmount
+
+      }
+
+      //total price handled
+      function funTotalPrice(id, actualPhonePrice){
+         const total_Price = document.getElementById(id).innerText
+         const actualTotalPrice = parseFloat(total_Price)
+         const finalTotalPrice = actualTotalPrice + actualPhonePrice
+         document.getElementById(id).innerText = finalTotalPrice
+
+      }
 
 
 
