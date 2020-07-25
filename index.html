@@ -14,10 +14,10 @@
 
    <section>
       <div class="container">
-         <div class="cart">
+         <div id="cartItems" class="cart">
             <div class="col-md-12 col-lg-10 mx-auto">
                
-               <div class="cart-item">
+               <div id="cartItem1" class="cart-item">
                   <div class="row">
                      <div class="col-md-7 center-item">
                         <img src="images/product-1.png" alt="">
@@ -38,8 +38,8 @@
                      </div>
                   </div>
                </div>
-
-               <div class="cart-item ">
+   
+               <div id="cartItem2" class="cart-item ">
                   <div class="row">
                      <div class="col-md-7 center-item mx-auto">
                         <img src="images/product-2.png" alt="">
@@ -47,11 +47,11 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button id="minusButton" class="btn btn-default">
+                           <button class="btn btn-default">
                               <i class="fas fa-minus"></i>
                            </button>
-                           <input id="currentAmount" type="text" class="form-control text-center" value="1">
-                           <button id="plusButton" class="btn btn-default">
+                           <input type="text" class="form-control text-center" value="1">
+                           <button class="btn btn-default">
                               <i class="fas fa-plus"></i>
                            </button>
 
@@ -89,30 +89,55 @@
 
    <script>
 
+      // document.getElementById('cartItem1').addEventListener('click', function(event){
+      //    console.log(event.target.parentNode,'cart item 1 click')
+      // })
+
+      // document.getElementById('cartItems').addEventListener('click', function(){
+      //    console.log(event.target.parentNode,'cart items click')
+
+      // })
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      // phone price value ekata varibale a raklam
       const phone_Price = document.getElementById('phonePrice').innerText // ekne innertext karon eta input tag nai.
       const actualPhonePrice = parseFloat(phone_Price)
 
       // plus button event handler..
       const plus_Button = document.getElementById('plusButton')
       plus_Button.addEventListener('click', function(){
-         const numberAmount = document.getElementById('currentAmount').value // ei id ta input tag a ace tai value add hobe.
-         const actualAmount = parseInt(numberAmount)
 
-         // plus button update
-         //const totalNumber = plusButtonUpdate('currentAmount', actualAmount)
+         const amount = getInputNumber('currentAmount')
          
-         const totalAmount = actualAmount + 1
+         // plus button update
+         //var totalAmount = plusButtonHandled('currentAmount',amount)
+         const totalAmount = amount + 1
          document.getElementById('currentAmount').value = totalAmount
 
+         
          //phone price update with plus
-         const totalPhonePrice = actualPhonePrice * totalAmount
-         document.getElementById('phonePrice').innerText = totalPhonePrice
-
-      
+         priceUpdate('phonePrice', totalAmount, actualPhonePrice)
+       
         funTotalPrice('subtotalPrice', actualPhonePrice)
         funTotalPrice('totalPrice', actualPhonePrice)
       
       })
+
     
 
       // minus button event handler..
@@ -128,14 +153,27 @@
          const totalPhonePrice = actualPhonePrice * totalAmount
          document.getElementById('phonePrice').innerText = totalPhonePrice
 
-         funTotalPrice('subtotalPrice', -1 * actualPhonePrice)
-         funTotalPrice('totalPrice', -1 * actualPhonePrice)
+         funTotalPrice('subtotalPrice', -1 * actualPhonePrice) //subtotal price handled
+         funTotalPrice('totalPrice', -1 * actualPhonePrice) // total price handled
          
       })
+      // conver number from string
+      function getInputNumber(id){
+         const numberAmount = document.getElementById(id).value // ei id ta input tag a ace tai value add hobe.
+         const actualAmount = parseInt(numberAmount)
+         return actualAmount
 
-      function plusButtonUpdate(id, actualAmount){
-         const totalAmount = actualAmount + 1
-         document.getElementById(id).value = totalAmount
+      }
+      //plus button handled.
+      function plusButtonHandled(id, amount){
+         const totalAmount = amount + 1;
+         document.getElementById('currentAmount').value = totalAmount;
+      }
+     
+      // phone price handled
+      function priceUpdate(id, totalNumber, actualPhonePrice){
+         const totalPhonePrice = actualPhonePrice * totalNumber
+         document.getElementById(id).innerText = totalPhonePrice
 
       }
 
