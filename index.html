@@ -47,16 +47,16 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default">
+                           <button id="minusButton2" class="btn btn-default">
                               <i class="fas fa-minus"></i>
                            </button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default">
+                           <input id="currentAmount2" type="text" class="form-control text-center" value="1">
+                           <button id="plusButton2" class="btn btn-default">
                               <i class="fas fa-plus"></i>
                            </button>
 
                         </div>
-                        <h5>$60</h5>
+                        <h5>$ <span id="phoneCoverPrice">60</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -100,27 +100,13 @@
       
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       // phone price value ekata varibale a raklam
       const phone_Price = document.getElementById('phonePrice').innerText // ekne innertext karon eta input tag nai.
       const actualPhonePrice = parseFloat(phone_Price)
 
       // plus button event handler..
-      const plus_Button = document.getElementById('plusButton')
-      plus_Button.addEventListener('click', function(){
+         const plus_Button = document.getElementById('plusButton')
+         plus_Button.addEventListener('click', function(){
 
          const amount = getInputNumber('currentAmount')
          
@@ -137,8 +123,6 @@
         funTotalPrice('totalPrice', actualPhonePrice)
       
       })
-
-    
 
       // minus button event handler..
       const minus_Button = document.getElementById('minusButton')
@@ -157,12 +141,51 @@
          funTotalPrice('totalPrice', -1 * actualPhonePrice) // total price handled
          
       })
+
+      // second items handled..
+      const phone_CoverPrice = document.getElementById('phoneCoverPrice').innerText // ekne innertext karon eta input tag nai.
+      const actualPhoneCoverPrice = parseFloat(phone_CoverPrice)
+
+      // plus button event handler..
+      const plus_Button2 = document.getElementById('plusButton2')
+      plus_Button2.addEventListener('click', function(){
+
+         const amount2 = getInputNumber('currentAmount2')
+         
+         // plus button update
+         const totalAmount2 = amount2 + 1
+         document.getElementById('currentAmount2').value = totalAmount2
+         
+         //phone price update with plus
+         priceUpdate('phoneCoverPrice', totalAmount2, actualPhoneCoverPrice)
+       
+        funTotalPrice('subtotalPrice', actualPhoneCoverPrice)
+        funTotalPrice('totalPrice', actualPhoneCoverPrice)
+      
+      })
+        // minus button event handler..
+      const minus_Button2 = document.getElementById('minusButton2')
+      minus_Button2.addEventListener('click', function(){
+         
+         const amount2 = getInputNumber('currentAmount2')
+         
+         const totalAmount2 = amount2 - 1
+         document.getElementById('currentAmount2').value = totalAmount2
+
+         //phone price update with plus
+         priceUpdate('phoneCoverPrice', totalAmount2, actualPhoneCoverPrice)
+
+         funTotalPrice('subtotalPrice', -1 * actualPhoneCoverPrice) //subtotal price handled
+         funTotalPrice('totalPrice', -1 * actualPhoneCoverPrice) // total price handled
+         
+      })
+
+
       // conver number from string
       function getInputNumber(id){
          const numberAmount = document.getElementById(id).value // ei id ta input tag a ace tai value add hobe.
          const actualAmount = parseInt(numberAmount)
          return actualAmount
-
       }
       //plus button handled.
       function plusButtonHandled(id, amount){
@@ -174,7 +197,6 @@
       function priceUpdate(id, totalNumber, actualPhonePrice){
          const totalPhonePrice = actualPhonePrice * totalNumber
          document.getElementById(id).innerText = totalPhonePrice
-
       }
 
       //total price handled
@@ -183,7 +205,6 @@
          const actualTotalPrice = parseFloat(total_Price)
          const finalTotalPrice = actualTotalPrice + actualPhonePrice
          document.getElementById(id).innerText = finalTotalPrice
-
       }
 
 
